@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    ingress.bluemix.net/client-max-body-size: serviceName=w3id-staging-proxy size=0
+    ingress.kubernetes.io/proxy-body-size: "0"
+    ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+  labels:
+    app: w3id-staging-proxy
+  name: w3id-staging-proxy
+spec:
+  rules:
+  - host: w3id-staging-proxy.jkwong.cloudns.cx
+    http:
+      paths:
+      - backend:
+          serviceName: w3id-staging-proxy
+          servicePort: 3000
+        path: /
+  tls:
+  - hosts:
+    - w3id-staging-proxy.jkwong.cloudns.cx
+    secretName: w3id-staging-proxy-tls

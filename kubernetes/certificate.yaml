@@ -1,0 +1,22 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: w3id-staging-proxy
+spec:
+  acme:
+    config:
+    - domains:
+      - w3id-staging-proxy.jkwong.cloudns.cx
+      http01:
+        ingress: ""
+        ingressClass: nginx
+    - domains:
+      - w3id-staging-proxy.jkwong.cloudns.cx
+  commonName: w3id-staging-proxy.jkwong.cloudns.cx
+  dnsNames:
+  - w3id-staging-proxy.jkwong.cloudns.cx
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt-prod
+  secretName: w3id-staging-proxy-tls
+
